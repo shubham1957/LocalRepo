@@ -2,10 +2,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Anagram Count</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .container{
+            margin-top: 5%;
+            display: flex;
+            flex-direction: column;
+            width: 30rem;
+            background-color: rgb(41, 164, 164);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .field{
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            padding: 2%;
+
+        }
+        .field>span{
+            display: flex;
+            padding: 2%;
+        }
+
+        span>label{
+            width: 30%;
+        }
+
+        input{
+            width: 50%;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the page !</h1>
+    <div class="container">
+        <h1>Count Anagrams</h1>
+        <div class="field">
+            <span>
+                <label for="inpString">Input String : </label>
+                <input type="text" id = "inpString" value="abcdabcd">
+            </span>
+
+            <span>
+                <label for="inpWord">Input word : </label>
+                <input type="text" id = "inpWord" value="abc">
+            </span>
+
+            <span style="text-align: center; width: 50%;">
+                <input type="submit" value="Submit" onclick="fun()">
+            </span>
+        </div>
+        <h3 id="nums"></h3>
+        <p id="desc"></p>
+    </div>
+
+    <script>
+        inpString.value = ""; 
+        inpWord.value = ""; 
+        nums.innerText = ""; 
+desc.innerText = ""; 
+
+function fun() { 
+	let count = 0; 
+	let res = []; 
+	str = inpString.value; 
+	word = inpWord.value; 
+	if (str === "" || word === "") { 
+		window.alert("Incorrect input!"); 
+		return; 
+	} 
+
+	let n = str.length; 
+	let wordLen = word.length; 
+	srtWord = word.split("").sort().join(""); 
+
+	for (let i = 0; i < n - wordLen + 1; ++i) { 
+		let sub = str 
+			.slice(i, i + wordLen) 
+			.split("") 
+			.sort() 
+			.join(""); 
+		if (sub === srtWord) { 
+			count += 1; 
+			res.push("'" + str.slice(i, i + wordLen) + "'"); 
+		} 
+	} 
+	let exp; 
+	if (count === 0) expl = "none"; 
+	else exp= res.join(","); 
+
+	nums.innerText = 
+		"Input string contains " + count + " Anagrams"; 
+	desc.innerText = 
+		"Anagrams of the word '" + 
+		word + 
+		"' are: " + 
+		exp; 
+}
+
+    </script>
 </body>
 </html>
